@@ -26,18 +26,28 @@
   <div id="app" class="content">
     <button @click="goElectronicSeal">南沙微警认证</button>
     <button @click="goElectronicBusinessLicense">电子营业执照</button>
-    <div>{{ urlStr }}</div>
+    <div>授权token: {{ urlObj.authorizeToken }}</div>
+    <div>用户uid: {{ urlObj.uid }}</div>
+    <div>第三方id: {{ urlObj.otherid }}</div>
+    <div>事项id: {{ urlObj.itemid }}</div>
+    <div>来源渠道: {{ urlObj.channel }}</div>
   </div>
 
   <script>
     const Counter = {
       data() {
         return {
-          urlStr: ''
+          urlObj: ''
         }
       },
       mounted() {
-        this.urlStr = window.location.search;
+        let urlData = window.location.search;
+        let params = urlData.split("?")[1].split("&");
+        let urlObj = {}
+
+        params.map(v => urlObj[v.split("=")[0]] = v.split("=")[1])
+
+        this.urlObj = urlObj;
 
       },
       methods: {
