@@ -4,6 +4,7 @@
 <head>
   <title>小程序web-view测试</title>
   <script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.3.2.js"></script>
+  <script src="https://unpkg.com/vue@next"></script>
   <style>
     .content {
       padding: 20px;
@@ -22,26 +23,36 @@
 </head>
 
 <body>
-  <div class="content">
-    <button onclick="goElectronicSeal()">南沙微警认证</button>
-    <button onclick="goElectronicBusinessLicense()">电子营业执照</button>
+  <div id="app" class="content">
+    <button @click="goElectronicSeal">南沙微警认证</button>
+    <button @click="goElectronicBusinessLicense">电子营业执照</button>
+    <div>{{ urlStr }}</div>
   </div>
+
   <script>
-    function goElectronicSeal() {
-      wx.miniProgram.navigateTo({ url: '/pages/electronic-seal/index?verifyIdent=d71649bc3b7144a7ba79c696223d1442' })
-    }
-    function goElectronicBusinessLicense() {
-      wx.miniProgram.navigateTo({
-        url: '/pages/electronic-seal/index?appId=wx63a9813a3b8601d2&path=pages%2Fmini%2FsacnLogin%2Fqrlogin&envVersion=release&extraData=%7B%22random%22%3A %221440001441902110100000003291633GsPNlObTE650A258%22%2C%22sysName%22%3A %22%E5%B9%BF%E4%B8%9C%E7%9C%81%E4%B8%9C%E8%8E%9E%E5%B8%82%E7%94%B5%E5%AD%90%E7%AD%BE%E5%90%8D%E4%B8%80%E4%BD%93%E5%8C%96%E5%B9%B3%E5%8F%B0%22%7D'
-      })
+    const Counter = {
+      data() {
+        return {
+          urlStr: ''
+        }
+      },
+      mounted() {
+        this.urlStr = window.location.search;
+
+      },
+      methods: {
+        goElectronicSeal() {
+          wx.miniProgram.navigateTo({ url: '/pages/electronic-seal/index?verifyIdent=d71649bc3b7144a7ba79c696223d1442' })
+        },
+        goElectronicBusinessLicense() {
+          wx.miniProgram.navigateTo({
+            url: '/pages/electronic-seal/index?appId=wx63a9813a3b8601d2&path=pages%2Fmini%2FsacnLogin%2Fqrlogin&envVersion=release&extraData=%7B%22random%22%3A %221440001441902110100000003291633GsPNlObTE650A258%22%2C%22sysName%22%3A %22%E5%B9%BF%E4%B8%9C%E7%9C%81%E4%B8%9C%E8%8E%9E%E5%B8%82%E7%94%B5%E5%AD%90%E7%AD%BE%E5%90%8D%E4%B8%80%E4%BD%93%E5%8C%96%E5%B9%B3%E5%8F%B0%22%7D'
+          })
+        }
+      }
     }
 
-    function getUrl() {
-      let url = window.location.search;
-      alert(url)
-    }
-
-    getUrl();
+    Vue.createApp(Counter).mount('#app')
 
   </script>
 </body>
