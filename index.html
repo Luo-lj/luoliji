@@ -62,14 +62,9 @@
           })
         },
         SignatureSucceeded(){
-          wx.miniProgram.reLaunch({
-            url: '/pages/stat/index',
-            success: () => {
-              wx.miniProgram.postMessage({
-                data: '点击签章成功'
-              })
-            }
-          })
+          wx.miniProgram.postMessage({ data: '获取成功' })
+            
+          wx.miniProgram.reLaunch({url: '/pages/stat/index'})
           
         }
       }
