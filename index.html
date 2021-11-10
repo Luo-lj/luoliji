@@ -62,7 +62,7 @@
           })
         },
         SignatureSucceeded(){
-          wx.miniProgram.postMessage(1)
+          wx.miniProgram.postMessage({ data: {state: '1'} })
             
           wx.miniProgram.reLaunch({url: '/pages/stat/index'})
           
