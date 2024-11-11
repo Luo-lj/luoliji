@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>小程序web-view测试H5功能</title>
+<script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.3.2.js"></script>
+<script src="https://cdn.staticfile.net/vue/2.2.2/vue.min.js"></script>
+</head>
+<body>
+<div id="app">
+   <!-- `greet` 是在下面定义的方法名 -->
+  <button v-on:click="postMessage">向小程序发送消息</button>
+</div>
+
+<script>
+var app = new Vue({
+  el: '#app',
+  data: {
+    name: 'Vue.js'
+  },
+  methods: {
+    // 向小程序发送消息
+    postMessage(){
+      console.log("99999")
+
+      wx.miniProgram.postMessage({ data: {
+        title: "灯光节",
+        path: "https://appnew.gzonline.gov.cn/html/zhsl/UnifiedAppointment?authorizeToken=3d88a6ba2482404793f1fbabfe9a7475&uid=512023124739&otherid=10000002&itemid=1498707255370102&channel=suiKang",
+        imageUrl: "https://imgcache.gzonline.gov.cn/cos/shb-revise/mine/icon-mine-shblogo.png",
+      } })
+
+      alert("向小程序发送消息成功")
+    }
+  }
+})
+</script>
+</body>
+</html>
