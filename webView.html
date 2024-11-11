@@ -21,13 +21,12 @@
     }
   </style>
 </head>
-
+pages/web-view/index
 <body>
   <div id="app" class="content">
     <button @click="goElectronicSeal">南沙微警认证</button>
     <button @click="goElectronicBusinessLicense">电子营业执照</button>
     <button @click="SignatureSucceeded">签章成功</button>
-    <button @click="getLocation">获取当前地址</button>
     <button @click="postMessage">向小程序发送消息</button>
 
     <div>授权token: {{ urlObj.authorizeToken }}</div>
@@ -39,12 +38,12 @@
 
   <script>
     const Counter = {
-      data () {
+      data() {
         return {
           urlObj: ''
         }
       },
-      mounted () {
+      mounted() {
         let urlData = window.location.search;
         let params = urlData.split("?")[1].split("&");
         let urlObj = {}
@@ -55,47 +54,21 @@
 
       },
       methods: {
-        goElectronicSeal () {
+        goElectronicSeal() {
           wx.miniProgram.navigateTo({ url: '/pages/electronic-seal/index?verifyIdent=d71649bc3b7144a7ba79c696223d1442' })
         },
-        goElectronicBusinessLicense () {
+        goElectronicBusinessLicense() {
           wx.miniProgram.navigateTo({
             url: '/pages/electronic-seal/index?appId=wx63a9813a3b8601d2&path=pages%2Fmini%2FsacnLogin%2Fqrlogin&envVersion=release&extraData=%7B%22random%22%3A %221440001441902110100000003291633GsPNlObTE650A258%22%2C%22sysName%22%3A %22%E5%B9%BF%E4%B8%9C%E7%9C%81%E4%B8%9C%E8%8E%9E%E5%B8%82%E7%94%B5%E5%AD%90%E7%AD%BE%E5%90%8D%E4%B8%80%E4%BD%93%E5%8C%96%E5%B9%B3%E5%8F%B0%22%7D'
           })
         },
-        SignatureSucceeded () {
-          wx.miniProgram.postMessage({ data: { state: '1' } })
-
-          wx.miniProgram.reLaunch({ url: '/pages/stat/index' })
-
+        SignatureSucceeded(){
+          wx.miniProgram.postMessage({ data: {state: '1'} })
+            
+          wx.miniProgram.reLaunch({url: '/pages/stat/index'})
+          
         },
 
-        getLocation: function () {
-          if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(function (position) {
-              alert('经度：' + position.coords.latitude)
-              alert('纬度：' + position.coords.longitude)
-            }, function (error) {
-              switch (error.code) {
-                case error.PERMISSION_DENIED:
-                  alert('用户拒绝对获取地理位置的请求。')
-                  break;
-                case error.POSITION_UNAVAILABLE:
-                  alert('位置信息是不可用的。')
-                  break;
-                case error.TIMEOUT:
-                  alert('请求用户地理位置超时。')
-                  break;
-                case error.UNKNOWN_ERROR:
-                  alert('未知错误。')
-                  break;
-              }
-            }, { enableHighAcuracy: false });
-          } else {
-            alert('不支持获取当前地址')
-          }
-        },
-        
         // 向小程序发送消息
         postMessage(){
           wx.miniProgram.postMessage({ data: {
