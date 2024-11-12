@@ -24,9 +24,8 @@ var app = new Vue({
       console.log("99999")
 
       wx.miniProgram.postMessage({ data: {
-        title: "灯光节",
-        path: "https://appnew.gzonline.gov.cn/html/zhsl/UnifiedAppointment?authorizeToken=3d88a6ba2482404793f1fbabfe9a7475&uid=512023124739&otherid=10000002&itemid=1498707255370102&channel=suiKang",
-        imageUrl: "https://imgcache.gzonline.gov.cn/cos/shb-revise/mine/icon-mine-shblogo.png",
+        itemId: '9964575460147755',
+        shareType: 1,
       } })
 
       alert("向小程序发送消息成功")
